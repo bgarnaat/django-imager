@@ -19,3 +19,8 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+
+# THIS IS FOR DEV.  IN PRODUCTION AN ACTUAL SERVER WILL EXIST.  (also, turn off debug in settings.py)
+# if settings.DEBUG:
+#     urlpatterns += (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
