@@ -9,13 +9,11 @@ US_REGIONS = [
     ('0', 'Hidden'),
     ('1', 'Alaska'),
     ('2', 'Hawaii'),
-    ('3', 'Mid-Atlantic'),
-    ('4', 'Midwest'),
-    ('5', 'New England'),
-    # ('ne', 'Northeast'),
-    ('6', 'Northwest'),
-    ('7', 'Southeast'),
-    ('8', 'SouthWest'),
+    ('3', 'Midwest'),
+    ('4', 'Northeast'),
+    ('5', 'Northwest'),
+    ('6', 'Southeast'),
+    ('7', 'SouthWest'),
 ]
 
 class ActiveProfileManager(models.Manager):

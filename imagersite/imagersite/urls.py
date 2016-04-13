@@ -15,10 +15,29 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from .views import home_page, ClassView
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    # regex ^ means line MUST start with whatever follows. e.g. 'admin/'
+    # regex $ means end of the line.  if this character is not present, view will match from on.  if present, will only match until this
     url(r'^admin/', admin.site.urls),
+    # url(r'^profile/', imager_profile.urls),
+    # url(r'^$', home_page, name='home_page'),
+    # url(r'^home/(?P<id>[0-9])$', home_page, name='home_page')
+    # url(r'^home/([0-9])$', home_page, name='home_page')  # this line returns an arg (unnamed) of the pattern.  previous line returns a kwarg (named)
+    # url(r'^home/(?P<id>[0-9])$', ClassView.as_view(), name='home_page')
+    url(r'^home/(?P<id>[0-9])$', TemplateView.as_view(template_name='home.html'), name='home_page')
 ]
+
+
+# can create sublists which are joined into urlpatterns
+'''
+image_urls = []
+profile_urls = []
+api_urls = []
+urlpatterns = image_urls + profile_urls + api_urls
+'''
 
 
 # THIS IS FOR DEV.  IN PRODUCTION AN ACTUAL SERVER WILL EXIST.  (also, turn off debug in settings.py)
