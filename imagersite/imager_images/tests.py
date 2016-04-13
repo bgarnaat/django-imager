@@ -3,13 +3,15 @@ from imager_profile.tests import UserFactory
 
 # Create your tests here.
 
-
-class PhotoFactory(factory.django.DjangoModelFactory):
-
+#
+# class PhotoFactory(factory.django.DjangoModelFactory):
+#     class Meta:
+#         pass
+#     pass
 
 
 class AlbunnFactory(factory.django.DjangoModelFactory):
-    class = Meta:
+    class Meta:
         model = albumn
 
 

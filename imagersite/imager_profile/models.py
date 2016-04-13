@@ -3,20 +3,20 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.utils.encoding import python_2_unicode_compatible
 
 
 US_REGIONS = [
     ('0', 'Hidden'),
     ('1', 'Alaska'),
     ('2', 'Hawaii'),
-    ('3', 'Mid-Atlantic'),
-    ('4', 'Midwest'),
-    ('5', 'New England'),
-    # ('ne', 'Northeast'),
-    ('6', 'Northwest'),
-    ('7', 'Southeast'),
-    ('8', 'SouthWest'),
+    ('3', 'Midwest'),
+    ('4', 'Northeast'),
+    ('5', 'Northwest'),
+    ('6', 'Southeast'),
+    ('7', 'SouthWest'),
 ]
+
 
 class ActiveProfileManager(models.Manager):
     """Query set ImagerProfile of active user."""
@@ -31,21 +31,31 @@ class ActiveProfileManager(models.Manager):
 class ImagerProfile(models.Model):
     """Profile of user model."""
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                related_name='profile'
-                                )
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        related_name='profile',
+        on_delete=models.CASCADE,
+        )
     objects = models.Manager()
     active = ActiveProfileManager()
-    location = models.CharField(default='', max_length=255, choices=US_REGIONS)
-    # location = models.CharField(default='', max_length=255)
-    camera_model = models.CharField(default='', max_length=255)
-    friends = models.ManyToManyField('self',
-                                     symmetrical=False,
-                                     related_name='friend_of',
-                                     )
-    # friends = models.ManyToManyField(settings.AUTH_USER_MODEL,
-    #                                  related_name='friend_of'
-    #                                  )
+    location = models.CharField(
+        default='',
+        max_length=2,
+        choices=US_REGIONS
+        )
+    camera_model = models.CharField(
+        default='',
+        max_length=255
+        )
+    friends = models.ManyToManyField(
+        'self',
+        symmetrical=False,
+        related_name='friend_of',
+        )
+    # friends = models.ManyToManyField(
+    #     settings.AUTH_USER_MODEL,
+    #     related_name='friend_of'
+    #     )
 
     def __str__(self):
         """Return username for user."""
